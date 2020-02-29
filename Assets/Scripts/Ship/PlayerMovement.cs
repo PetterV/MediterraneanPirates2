@@ -18,9 +18,6 @@ public class PlayerMovement : MonoBehaviour
     public float turnSpeed = 0.1f;
     public float currentTurnSpeed;
 
-    public bool turningLeft;
-    public bool turningRight;
-
     void Start(){
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         uIController = GameObject.Find("UIController").GetComponent<UIController>();
@@ -42,18 +39,14 @@ public class PlayerMovement : MonoBehaviour
             }
             // Turning
             if(Input.GetKey(KeyCode.A)){
-                turningLeft = true;
                 TurnLeft();
             }
-            else {
-                turningLeft = false;
-            }
             if(Input.GetKey(KeyCode.D)){
-                turningRight = true;
                 TurnRight();
             }
-            else {
-                turningRight = false;
+            // Debug turn-around
+            if(Input.GetKey(KeyCode.V)){
+                TurnAround();
             }
             // Calculate speed forwards
             CalculateSpeed();
@@ -119,8 +112,13 @@ public class PlayerMovement : MonoBehaviour
         transform.Rotate(newRotation);
     }
 
+    public void TurnAround(){
+        Vector3 newRotation = new Vector3(180, 0, 0);
+        transform.Rotate(newRotation);
+        currentSpeed = 0;
+    }
+
     float GetCurrentTurnSpeed(){
-        // TODO: Make nonlinear
         float sailLevelSpeedImpact = maxSailLevel * sailLevelSpeedFactor;
         float calculatedMaxSpeed = baseSpeed * sailLevelSpeedImpact;
         float turnSpeedFactor = calculatedMaxSpeed - (currentSpeed * 0.6f);
