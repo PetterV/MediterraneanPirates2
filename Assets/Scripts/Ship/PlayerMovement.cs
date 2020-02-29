@@ -121,7 +121,11 @@ public class PlayerMovement : MonoBehaviour
 
     float GetCurrentTurnSpeed(){
         // TODO: Make nonlinear
-        float turnSpeedFactor = ((maxSailLevel * sailLevelSpeedFactor) + baseSpeed) - currentSpeed;
+        float sailLevelSpeedImpact = maxSailLevel * sailLevelSpeedFactor;
+
+        float calculatedMaxSpeed = baseSpeed * sailLevelSpeedImpact;
+        float turnSpeedFactor = calculatedMaxSpeed - currentSpeed;
+        float normalisedTurnSpeedFactor = turnSpeedFactor;
         currentTurnSpeed = turnSpeed * turnSpeedFactor;
         return currentTurnSpeed;
     }
