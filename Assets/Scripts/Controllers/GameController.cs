@@ -9,6 +9,10 @@ public class GameController : MonoBehaviour
     public bool pausedByPlayer = false;
     public bool pausedByEvent = false;
     public GCData data = new GCData();
+
+    public int startingInventorySlots = 10;
+    public int maxInventorySlots = 30;
+    public int startingDucats = 300;
     void Awake()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
@@ -23,6 +27,10 @@ public class GameController : MonoBehaviour
 
     void Start(){
         uIController = GameObject.Find("UIController").GetComponent<UIController>();
+    }
+
+    void ShipSetup(){
+
     }
 
     public void EventPause(){

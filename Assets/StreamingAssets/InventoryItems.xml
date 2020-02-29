@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<InventoryItems>
+  <item>
+    <id>1</id>
+  	<itemName>Marble</itemName>
+    <baseValue>1.0</baseValue>
+  </item>
+  <item>
+    <id>2</id>
+  	<itemName>Garlic</itemName>
+    <baseValue>2.0</baseValue>
+  </item>
+</InventoryItems>
