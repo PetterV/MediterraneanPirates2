@@ -441,7 +441,7 @@ MonoBehaviour:
   maxSpeed: 30
   sailLevelSpeedFactor: 1
   sailLevel: 0
-  turnSpeed: 0.1
+  turnSpeed: 0.01
   currentTurnSpeed: 0
   turningLeft: 0
   turningRight: 0
@@ -1136,13 +1136,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.43950227, y: -0, z: -0, w: 0.89824146}
-  m_LocalPosition: {x: 0, y: 311, z: -248.2}
+  m_LocalRotation: {x: 0.40883243, y: -0, z: -0, w: 0.9126095}
+  m_LocalPosition: {x: 0, y: 235, z: -256}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 52.144, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 48.263, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1437,8 +1437,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1437978991}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0000087023, y: 0, z: -0.000014186}
-  m_LocalScale: {x: 199.55309, y: 199.55309, z: 199.55309}
+  m_LocalPosition: {x: 0.00001359, y: 0, z: -0.000019551}
+  m_LocalScale: {x: 94.00084, y: 94.00084, z: 94.00084}
   m_Children: []
   m_Father: {fileID: 909372423}
   m_RootOrder: 0
