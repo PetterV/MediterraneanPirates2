@@ -1071,6 +1071,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1174,6 +1175,20 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 893aa41510c493b419fe40af99b6fd09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerShip: {fileID: 1935992028}
+  speed: 2
 --- !u!1 &1079836814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,3 +1674,9 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497544643}
   m_CullTransparentMesh: 0
+--- !u!1 &1935992028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1356397899412408, guid: f6f346a53c4b3a24c867c377bde62d17,
+    type: 3}
+  m_PrefabInstance: {fileID: 388363991}
+  m_PrefabAsset: {fileID: 0}
