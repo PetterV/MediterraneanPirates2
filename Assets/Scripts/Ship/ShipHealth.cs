@@ -6,8 +6,7 @@ public class ShipHealth : MonoBehaviour
 {
     public float shipHealth = 1000f;
 
-    void OnCollisionEnter(Collision other) {
-        Debug.Log("Deceted collision from " + other.gameObject.name);
+    void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "AttackObject"){
             TakeDamage(other.gameObject.GetComponent<DamageDealing>().damage);
             if (other.gameObject.GetComponent<DamageDealing>().destroyOnHit){

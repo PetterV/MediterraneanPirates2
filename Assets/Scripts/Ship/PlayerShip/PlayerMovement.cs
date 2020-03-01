@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     float currentTurnSpeed;
     public CannonManager rightCannons;
     public CannonManager leftCannons;
+    public GameObject seaLevel;
+    
 
     void Start(){
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
@@ -35,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
             gameController.TogglePlayerPause();
         }
         if (!gameController.paused){
+            
             // Sail level change
             if (Input.GetKeyDown(KeyCode.W)){
                 IncreaseSailLevel();
@@ -63,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
             CalculateSpeed();
             // Move forwards
             MoveForwards();
+            seaLevel.transform.position = new Vector3(transform.position.x, seaLevel.transform.position.y, transform.position.z);
         }
     }
 
