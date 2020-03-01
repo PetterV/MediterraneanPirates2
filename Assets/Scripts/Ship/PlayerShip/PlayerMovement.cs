@@ -9,14 +9,19 @@ public class PlayerMovement : MonoBehaviour
     public GameObject movementTarget;
     public float acceleration = 0.03f;
     public float deceleration = 0.01f;
-    public float currentSpeed;
+    [SerializeField]
+    float currentSpeed;
     public float baseSpeed = 1f;
-    public float maxSpeed;
+    [SerializeField]
+    float maxSpeed;
     public float sailLevelSpeedFactor = 1f;
     public int sailLevel = 0;
     int maxSailLevel = 3;
     public float turnSpeed = 0.1f;
-    public float currentTurnSpeed;
+    [SerializeField]
+    float currentTurnSpeed;
+    public CannonManager rightCannons;
+    public CannonManager leftCannons;
 
     void Start(){
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
@@ -47,6 +52,12 @@ public class PlayerMovement : MonoBehaviour
             // Debug turn-around
             if(Input.GetKey(KeyCode.V)){
                 TurnAround();
+            }
+            if (Input.GetKeyDown(KeyCode.E)){
+                rightCannons.FireCannons();
+            }
+            if (Input.GetKeyDown(KeyCode.Q)){
+                leftCannons.FireCannons();
             }
             // Calculate speed forwards
             CalculateSpeed();
