@@ -1124,6 +1124,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &730727225 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7529881059570438407, guid: cdcf38e08a09c644caee4a16026ace0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7529881058618993191}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb513a884a7aa6c43a30f5b8f400ef95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &835011857
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,6 +1589,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerShip: {fileID: 426251337}
   speed: 3
+--- !u!114 &966559062 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7529881059478149111, guid: cdcf38e08a09c644caee4a16026ace0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7529881058618993191}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb513a884a7aa6c43a30f5b8f400ef95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1079836814
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,10 +2030,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 558480778}
-  leftCannon: {fileID: 0}
-  leftCannonCooldown: {fileID: 0}
-  rightCannon: {fileID: 0}
-  rightCannonCooldown: {fileID: 0}
+  leftCannon: {fileID: 730727225}
+  leftCannonCooldown: {fileID: 505118998}
+  rightCannon: {fileID: 966559062}
+  rightCannonCooldown: {fileID: 1271184574}
 --- !u!4 &1340824333
 Transform:
   m_ObjectHideFlags: 0
