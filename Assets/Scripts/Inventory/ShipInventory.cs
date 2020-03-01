@@ -6,53 +6,64 @@ using UnityEngine.UI;
 
 public class ShipInventory : MonoBehaviour
 {
-    public int unlockedInventorySlots;
     public int ducats;
+    public int startingSlots = 10;
+    int unlockedSlots;
     public GameObject itemSlotParent;
     public GameObject itemSlotPrefab;
-    public Dictionary<int, GameObject> allInventorySlots;
+    public Dictionary<int, GameObject> allInventorySlots = new Dictionary<int, GameObject>();
     GameController gameController;
-    int idToSet;
+    public int idToSet;
 
     void Start(){
-        allInventorySlots = new Dictionary<int, GameObject>();
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         SetupShipInventory();
     }
 
     // Inventory slot handling
     void SetupShipInventory(){
-        int idToSet = 1;
+        // Start at 1 for convenience
+        idToSet = 1;
+        // Find all the possible inventoryslots
         List<GameObject> allFoundInventorySlots = GameObject.FindGameObjectsWithTag("InventorySlot").ToList();
         foreach(GameObject slot in allFoundInventorySlots){
             InventorySlot slotScript = slot.GetComponent<InventorySlot>();
-            slotScript.id = idToSet;
-            allInventorySlots.Add(slot.GetComponent<InventorySlot>().id, slot);
-            idToSet++;
+            slotScript.id = idToSet; // Set the internal ID
+            idToSet++; // Iterate ID for the next entry's sake
+            allInventorySlots.Add(slot.GetComponent<InventorySlot>().id, slot); // Add it to the database
+            // Deactive slots that start locked
+            if (slotScript.id > startingSlots){
+                slotScript.free = false;
+                slot.SetActive(false);
+            }
         }
+        unlockedSlots = startingSlots; // Set the number of unlocked slots, for the sake of later unlocks
+        
+        // Give player their starting money
         ducats = gameController.startingDucats;
     }
 
-    public void AddFreeSlots(int amount){
-        int i = 0;
-        while (i < amount){
-            GameObject newSlot = Instantiate(itemSlotPrefab);
-            Image image = newSlot.transform.Find("ItemGraphic").GetComponent<Image>();
-            image.color = new Color(image.color.r, image.color.g, image.color.b, 0f);
-            newSlot.transform.SetParent(itemSlotParent.transform);
-            InventorySlot newSlotScript = newSlot.GetComponent<InventorySlot>();
-            newSlotScript.id = idToSet;
-            idToSet++;
-            allInventorySlots.Add(newSlot.GetComponent<InventorySlot>().id, newSlot);
-            unlockedInventorySlots++;
-            i++;
+    public void AddFreeSlots(int amount){ // Method to unlock more slots once the game has started
+        int idToUnlock = unlockedSlots + 1; // Get the lowest ID you'll be unlocking
+        int idEnd = unlockedSlots + amount; // Get the highest ID you'll be unlocking
+        // Unlock all relevant entries:
+        while (idToUnlock <= idEnd){
+            allInventorySlots[idToUnlock].GetComponent<InventorySlot>().free = true;
+            allInventorySlots[idToUnlock].SetActive(true);
+            idToUnlock++;
         }
+        unlockedSlots = idEnd; // Set the new amount of unlocked slots
+        Debug.Log("The size of the inventory is now " + allInventorySlots.Count);
     }
     
     public bool CheckForFreeSlot(){
         bool freeSlot = false;
         foreach(KeyValuePair<int, GameObject> slotEntry in allInventorySlots){
-            if (slotEntry.Value.GetComponent<InventorySlot>().free){
+            if (!slotEntry.Value.activeSelf){
+                return freeSlot;
+            }
+            else if (slotEntry.Value.GetComponent<InventorySlot>().free){
+                Debug.Log("Slot " + slotEntry.Value.GetComponent<InventorySlot>().id + " is free");
                 freeSlot = true;
                 return freeSlot;
             }

@@ -33,7 +33,7 @@ public class InventoryList
 	}
 }
 
-public class InventoryItem : MonoBehaviour
+public class InventoryItem
 {
     public int id;
     public string itemName;
