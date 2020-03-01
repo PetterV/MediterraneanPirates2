@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryItemController : MonoBehaviour
 {
     public List <InventoryItem> itemTypes;
+    public List<Sprite> imagesSortedByID;
     
     void Awake(){
         GameObject[] objs = GameObject.FindGameObjectsWithTag("InventoryItemController");
@@ -16,12 +18,15 @@ public class InventoryItemController : MonoBehaviour
     }
 
     void Start(){
-        LoadActivities();
+        LoadInventoryItems();
     }
 
-    public void LoadActivities(){
+    public void LoadInventoryItems(){
         InventoryList inventoryList = new InventoryList();
-        itemTypes = inventoryList.GetActivities();
+        itemTypes = inventoryList.GetInventoryItems();
+        foreach (InventoryItem item in itemTypes){
+            item.icon = imagesSortedByID[item.iconID];
+        }
 
         Debug.Log("Loaded items: " + itemTypes.Count);
     }

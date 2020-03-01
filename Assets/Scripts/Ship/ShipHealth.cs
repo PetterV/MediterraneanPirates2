@@ -33,6 +33,7 @@ public class ShipHealth : MonoBehaviour
 
     public void StartSinking(){
         Debug.Log("Sunk " + gameObject.name + "!");
-        Destroy(gameObject);
+        GetComponent<BoxCollider>().isTrigger = true;
+        Destroy(gameObject, 10);
     }
 }

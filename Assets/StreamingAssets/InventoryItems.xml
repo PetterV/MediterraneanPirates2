@@ -4,10 +4,12 @@
     <id>1</id>
   	<itemName>Marble</itemName>
     <baseValue>1.0</baseValue>
+    <iconID>0</iconID>
   </item>
   <item>
     <id>2</id>
   	<itemName>Garlic</itemName>
     <baseValue>2.0</baseValue>
+    <iconID>0</iconID>
   </item>
 </InventoryItems>
