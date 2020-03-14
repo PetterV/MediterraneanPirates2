@@ -9,6 +9,7 @@ public class PortInventory : MonoBehaviour
     GameController gameController;
     List<InventoryItem> itemsSoldHere;
     public List<ItemForSale> itemsForSale;
+    public List<ItemForSale> itemsForPurchase;
     public void SetUpPortInventory(){
         port = gameObject.GetComponent<Port>();
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
@@ -71,8 +72,38 @@ public class PortInventory : MonoBehaviour
             price = priceTest2;
         }
 
+        price = Mathf.Round(price);
+
         // Return
         return price;
+    }
+
+    float CalculateBuyPrice(float minPrice, float maxPrice){
+        // TODO: If item is for sale here, base buy price on sell price
+        float priceTest1 = Random.Range(minPrice, maxPrice);
+        float priceTest2 = Random.Range(minPrice, maxPrice);
+        float price;
+        if (priceTest1 > priceTest2){
+            price = priceTest1;
+        }
+        else {
+            price = priceTest2;
+        }
+        price = Mathf.Round(price);
+
+        return price;
+    }
+
+    void SetUpPurchaseList(){
+        itemsForPurchase = new List<ItemForSale>();
+
+        foreach(InventoryItem item in inventoryItemController.itemTypes){
+            ItemForSale newItem = new ItemForSale();
+            newItem.item = item;
+            newItem.price = CalculateBuyPrice(item.minValue, item.maxValue);
+
+            itemsForPurchase.Add(newItem);
+        }
     }
 }
 

@@ -12,15 +12,13 @@ public class PortScreen : MonoBehaviour
     public GameObject sellButtonsPrefab;
     public List<GameObject> sellButtons;
     ShipInventory shipInventory;
+    public TextMeshProUGUI itemBeingSoldName;
+    public TextMeshProUGUI itemBeingSoldCost;
     void Start(){
         shipInventory = GameObject.FindWithTag("Player").GetComponent<ShipInventory>();
     }
     public void UpdatePortHeader(string name){
         portName.text = name;
-    }
-
-    public void PortSetup(Port port){
-        
     }
 
     public void LeavePort(){
@@ -55,5 +53,12 @@ public class PortScreen : MonoBehaviour
         {
             Destroy(button);
         }
+    }
+
+    public void UpdateItemSaleView(){
+        ItemForSale itemForSale = currentPort.GetComponent<PortInventory>().itemsForPurchase.Find(x => x.item == shipInventory.selectedSlot.GetComponent<InventorySlot>().item);
+
+        itemBeingSoldName.text = itemForSale.item.itemName;
+        itemBeingSoldCost.text = itemForSale.price.ToString();
     }
 }

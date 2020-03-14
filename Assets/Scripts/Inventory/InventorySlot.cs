@@ -7,6 +7,7 @@ public class InventorySlot : MonoBehaviour
 {
     public InventoryItem item;
     public int id;
+    ShipInventory shipInventory;
     Image image;
     public bool free = true;
 
@@ -16,6 +17,7 @@ public class InventorySlot : MonoBehaviour
 
     void Awake(){
         image = gameObject.transform.Find("ItemGraphic").GetComponent<Image>();
+        shipInventory = GameObject.FindWithTag("Player").GetComponent<ShipInventory>();
     }
 
     public void AddItem(InventoryItem itemType){
@@ -23,5 +25,9 @@ public class InventorySlot : MonoBehaviour
         free = false;
         image.sprite = itemType.icon;
         image.color = new Color(0,0,0,1);
+    }
+
+    public void SelectThisSlot(){
+        shipInventory.SelectInventorySlot(gameObject);
     }
 }

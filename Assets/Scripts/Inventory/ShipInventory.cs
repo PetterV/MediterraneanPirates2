@@ -9,6 +9,8 @@ public class ShipInventory : MonoBehaviour
     public int ducats;
     public int startingSlots = 10;
     int unlockedSlots;
+    public bool shipInventoryOpen = false;
+    public GameObject selectedSlot;
     public GameObject itemSlotParent;
     public GameObject itemSlotPrefab;
     public Dictionary<int, GameObject> allInventorySlots = new Dictionary<int, GameObject>();
@@ -113,5 +115,21 @@ public class ShipInventory : MonoBehaviour
     public void GainDucats(int gain){
         ducats = ducats + gain;
         uIController.UpdateDucatCount(ducats);
+    }
+
+    public void ToggleOpenInventoryMenuStatus(){
+        shipInventoryOpen = !shipInventoryOpen;
+        if (!shipInventoryOpen){
+            DeselectInventorySlot();
+        }
+    }
+
+    public void DeselectInventorySlot(){
+        selectedSlot = null;
+    }
+
+    public void SelectInventorySlot(GameObject slotObject){
+        DeselectInventorySlot();
+        selectedSlot = slotObject;
     }
 }
