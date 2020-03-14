@@ -3,13 +3,28 @@
   <item>
     <id>1</id>
   	<itemName>Marble</itemName>
-    <baseValue>1.0</baseValue>
+    <baseValue>5.0</baseValue>
+    <minValue>3.0</minValue>
+    <maxValue>10.0</maxValue>
     <iconID>0</iconID>
+    <port>1,2,3</port>
   </item>
   <item>
     <id>2</id>
   	<itemName>Garlic</itemName>
-    <baseValue>2.0</baseValue>
+    <baseValue>10.0</baseValue>
+    <minValue>5.0</minValue>
+    <maxValue>20.0</maxValue>
     <iconID>0</iconID>
+    <port>1,2,3</port>
+  </item>
+  <item>
+    <id>3</id>
+  	<itemName>FireRocks</itemName>
+    <baseValue>12.0</baseValue>
+    <minValue>10.0</minValue>
+    <maxValue>28.0</maxValue>
+    <iconID>0</iconID>
+    <port>1,2,3</port>
   </item>
 </InventoryItems>

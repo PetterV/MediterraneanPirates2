@@ -9,6 +9,7 @@ TagManager:
   - InventoryItemController
   - AttackObject
   - InventorySlot
+  - Port
   layers:
   - Default
   - TransparentFX

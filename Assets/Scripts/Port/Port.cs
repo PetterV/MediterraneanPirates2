@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class Port : MonoBehaviour
 {
+    public int portID;
     public GameObject portScreen;
+    public PortScreen portScreenScript;
     public GameObject movementObject;
     GameController gameController;
     public string portName;
     public bool playerInPort;
     public bool showPortScreen;
+    public PortInventory portInventory;
     float portDelay = 0.3f;
     float timeRemaining;
 
-    void Start(){
+    public void SetupPort(){
+        Debug.Log("Attempting to set up port " + portName);
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        portInventory = GetComponent<PortInventory>();
+        portInventory.SetUpPortInventory();
+        Debug.Log("Successfully set up " + portName);
     }
     
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("Something entered!");
         if (other.gameObject == movementObject){
             playerInPort = true;
             timeRemaining = portDelay;
-        }
-        else {
-            Debug.Log("Definitely wasn't the player");
         }
     }
 
@@ -39,8 +42,9 @@ public class Port : MonoBehaviour
     }
 
     public void ShowPortScreen(){
-        portScreen.GetComponent<PortScreen>().UpdatePortHeader(portName);
-        portScreen.GetComponent<PortScreen>().currentPort = this;
+        portScreenScript.UpdatePortHeader(portName);
+        portScreenScript.currentPort = this;
+        portScreenScript.PopulateSellButtonList(portInventory);
         portScreen.SetActive(true);
         gameController.EventPause();
     }
@@ -50,6 +54,7 @@ public class Port : MonoBehaviour
         showPortScreen = false;
         playerInPort = false;
         movementObject.GetComponent<PlayerMovement>().TurnAround();
+        portScreenScript.ClearSellButtons();
         gameController.EventUnpause();
     }
 }

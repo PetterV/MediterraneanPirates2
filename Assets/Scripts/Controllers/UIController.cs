@@ -7,6 +7,7 @@ using TMPro;
 public class UIController : MonoBehaviour
 {
     TextMeshProUGUI sailSpeedDisplay;
+    TextMeshProUGUI ducatCount;
     public GameObject pauseMenu;
     public CannonManager leftCannon;
     public Image leftCannonCooldown;
@@ -24,8 +25,9 @@ public class UIController : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    void Start(){
+    public void SetUpUIController(){
         sailSpeedDisplay = GameObject.Find("SailSpeedDisplay").GetComponent<TextMeshProUGUI>();
+        ducatCount = GameObject.Find("DucatCounter").GetComponent<TextMeshProUGUI>();
         UpdateSailSpeedDisplay(0);
     }
 
@@ -55,5 +57,9 @@ public class UIController : MonoBehaviour
 
     private void Update() {
         UpdateCannonCooldown();
+    }
+
+    public void UpdateDucatCount(int ducats){
+        ducatCount.text = ducats.ToString();
     }
 }

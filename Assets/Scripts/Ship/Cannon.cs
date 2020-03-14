@@ -10,4 +10,3 @@ public class Cannon : MonoBehaviour
             cannonBall.GetComponent<Rigidbody>().AddForce(shotForce);
         }
     }
-}

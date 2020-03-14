@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     UIController uIController;
+    InventoryItemController inventoryItemController;
     public bool paused = false;
     public bool pausedByPlayer = false;
     public bool pausedByEvent = false;
@@ -27,10 +28,16 @@ public class GameController : MonoBehaviour
 
     void Start(){
         uIController = GameObject.Find("UIController").GetComponent<UIController>();
-    }
-
-    void ShipSetup(){
-
+        inventoryItemController = GameObject.Find("InventoryItemController").GetComponent<InventoryItemController>();
+        inventoryItemController.SetupInventoryItemController();
+        uIController.SetUpUIController();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<ShipInventory>().SetupShipInventory();
+        GameObject[] ports = GameObject.FindGameObjectsWithTag("Port");
+        foreach (GameObject port in ports)
+        {
+            Debug.Log("Setting up " + port.name);
+            port.GetComponent<Port>().SetupPort();
+        }
     }
 
     public void EventPause(){

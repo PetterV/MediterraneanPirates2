@@ -16,8 +16,8 @@ public class InventoryItemController : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
     }
-
-    void Start(){
+    
+    public void SetupInventoryItemController(){
         LoadInventoryItems();
     }
 

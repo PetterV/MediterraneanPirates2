@@ -13,15 +13,14 @@ public class ShipInventory : MonoBehaviour
     public GameObject itemSlotPrefab;
     public Dictionary<int, GameObject> allInventorySlots = new Dictionary<int, GameObject>();
     GameController gameController;
+    UIController uIController;
     public int idToSet;
 
-    void Start(){
-        gameController = GameObject.Find("GameController").GetComponent<GameController>();
-        SetupShipInventory();
-    }
-
     // Inventory slot handling
-    void SetupShipInventory(){
+    public void SetupShipInventory(){
+        // Fetch controllers
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        uIController = GameObject.Find("UIController").GetComponent<UIController>();
         // Start at 1 for convenience
         idToSet = 1;
         // Find all the possible inventoryslots
@@ -41,6 +40,7 @@ public class ShipInventory : MonoBehaviour
         
         // Give player their starting money
         ducats = gameController.startingDucats;
+        uIController.UpdateDucatCount(ducats);
     }
 
     public void AddFreeSlots(int amount){ // Method to unlock more slots once the game has started
@@ -104,6 +104,7 @@ public class ShipInventory : MonoBehaviour
     public void PayDucats(int cost){
         if (CheckAffordability(cost)){
             ducats = ducats - cost;
+            uIController.UpdateDucatCount(ducats);
         }
         else {
             Debug.LogError("Trying to buy something you can't afford!");
@@ -111,5 +112,6 @@ public class ShipInventory : MonoBehaviour
     }
     public void GainDucats(int gain){
         ducats = ducats + gain;
+        uIController.UpdateDucatCount(ducats);
     }
 }
