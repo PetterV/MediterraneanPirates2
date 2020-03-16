@@ -11,7 +11,7 @@ public class PortInventory : MonoBehaviour
     List<InventoryItem> inventoryItemsPurchasableHere;
     public List<ItemForSale> itemsPurchasableHere;
     public List<ItemForSale> itemsSellPricesHere;
-    float itemForPurchaseSellPriceFactor = 0.7f:
+    float itemForPurchaseSellPriceFactor = 0.7f;
     public void SetUpPortInventory(){
         port = gameObject.GetComponent<Port>();
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
