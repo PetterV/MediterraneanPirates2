@@ -21,9 +21,22 @@ public class CannonManager : MonoBehaviour
     public void FireCannons(){
         if (cannonCooldown <= 0){
             foreach (GameObject cannon in cannons){
-                cannon.GetComponent<Cannon>().Fire(cannonball, standardShotStrength);
+                if (cannon.activeSelf){
+                    cannon.GetComponent<Cannon>().Fire(cannonball, standardShotStrength);
+                }
             }
             cannonCooldown = cannonCooldownTime;
+        }
+    }
+
+    public void SetActiveCannons(int activeCannons){
+        foreach (GameObject cannon in cannons){
+            cannon.SetActive(false);
+        }
+        int i = 0;
+        while (i < activeCannons){
+            cannons[i].SetActive(true);
+            i++;
         }
     }
 }
