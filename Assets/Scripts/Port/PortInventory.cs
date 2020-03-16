@@ -1,49 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PortInventory : MonoBehaviour
 {
     Port port;
     InventoryItemController inventoryItemController;
     GameController gameController;
-    List<InventoryItem> itemsSoldHere;
-    public List<ItemForSale> itemsForSale;
-    public List<ItemForSale> itemsForPurchase;
+    List<InventoryItem> inventoryItemsPurchasableHere;
+    public List<ItemForSale> itemsPurchasableHere;
+    public List<ItemForSale> itemsSellPricesHere;
+    float itemForPurchaseSellPriceFactor = 0.7f:
     public void SetUpPortInventory(){
         port = gameObject.GetComponent<Port>();
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         inventoryItemController = GameObject.Find("InventoryItemController").GetComponent<InventoryItemController>();
-        itemsSoldHere = new List<InventoryItem>();
+        inventoryItemsPurchasableHere = new List<InventoryItem>();
 
-        Debug.Log(port.portName + " sells:");
         foreach (InventoryItem item in inventoryItemController.itemTypes)
         {
             if (item.ports.Contains(port.portID)){
-                itemsSoldHere.Add(item);
+                inventoryItemsPurchasableHere.Add(item);
                 Debug.Log(item.itemName);
             }
         }
-        if (itemsSoldHere.Count < 1){
+        if (inventoryItemsPurchasableHere.Count < 1){
             Debug.LogError("Warning! Found port with no items for sale!");
         }
 
-        SetupItemsForSale();
-        SetUpPurchaseList();
+        SetupItemsForPurchase();
+        SetUpBuyList();
     }
 
-    void SetupItemsForSale(){
-        itemsForSale = new List<ItemForSale>();
-        foreach (InventoryItem item in itemsSoldHere)
+    void SetupItemsForPurchase(){
+        itemsPurchasableHere = new List<ItemForSale>();
+        foreach (InventoryItem item in inventoryItemsPurchasableHere)
         {
             ItemForSale newItem = new ItemForSale();
             newItem.item = item;
-            newItem.price = CalculatePrice(item.minValue, item.maxValue, item.baseValue);
-            itemsForSale.Add(newItem);
+            newItem.price = CalculatePurchasePrice(item.minValue, item.maxValue, item.baseValue);
+            itemsPurchasableHere.Add(newItem);
         }
     }
 
-    float CalculatePrice(float minPrice, float maxPrice, float baseValue){
+    float CalculatePurchasePrice(float minPrice, float maxPrice, float baseValue){
         // TODO: Better weight towards baseValue
         float priceTest1 = Random.Range(minPrice, maxPrice);
         float priceTest2 = Random.Range(minPrice, maxPrice);
@@ -79,31 +80,37 @@ public class PortInventory : MonoBehaviour
         return price;
     }
 
-    float CalculateBuyPrice(float minPrice, float maxPrice){
-        // TODO: If item is for sale here, base buy price on sell price
-        float priceTest1 = Random.Range(minPrice, maxPrice);
-        float priceTest2 = Random.Range(minPrice, maxPrice);
+    float CalculateSellPrice(ItemForSale item){
         float price;
-        if (priceTest1 > priceTest2){
-            price = priceTest1;
+        ItemForSale existingItem = itemsPurchasableHere.Find(x => x.item.id == item.item.id);
+        if (existingItem != null){
+            price = existingItem.price * itemForPurchaseSellPriceFactor;
         }
         else {
-            price = priceTest2;
+            float priceTest1 = Random.Range(item.item.minValue, item.item.maxValue);
+            float priceTest2 = Random.Range(item.item.minValue, item.item.maxValue);
+            if (priceTest1 > priceTest2){
+                price = priceTest1;
+            }
+            else {
+                price = priceTest2;
+            }
         }
+
         price = Mathf.Round(price);
 
         return price;
     }
 
-    void SetUpPurchaseList(){
-        itemsForPurchase = new List<ItemForSale>();
+    void SetUpBuyList(){
+        itemsSellPricesHere = new List<ItemForSale>();
 
         foreach(InventoryItem item in inventoryItemController.itemTypes){
             ItemForSale newItem = new ItemForSale();
             newItem.item = item;
-            newItem.price = CalculateBuyPrice(item.minValue, item.maxValue);
+            newItem.price = CalculateSellPrice(newItem);
 
-            itemsForPurchase.Add(newItem);
+            itemsSellPricesHere.Add(newItem);
         }
     }
 }

@@ -7,7 +7,7 @@
     <minValue>3.0</minValue>
     <maxValue>10.0</maxValue>
     <iconID>0</iconID>
-    <port>1,2,3</port>
+    <port>1</port>
   </item>
   <item>
     <id>2</id>
@@ -16,7 +16,7 @@
     <minValue>5.0</minValue>
     <maxValue>20.0</maxValue>
     <iconID>0</iconID>
-    <port>1,2,3</port>
+    <port>1</port>
   </item>
   <item>
     <id>3</id>
@@ -25,6 +25,33 @@
     <minValue>10.0</minValue>
     <maxValue>28.0</maxValue>
     <iconID>0</iconID>
-    <port>1,2,3</port>
+    <port>1,2</port>
+  </item>
+  <item>
+    <id>4</id>
+  	<itemName>Dread Goat</itemName>
+    <baseValue>15.0</baseValue>
+    <minValue>6.0</minValue>
+    <maxValue>23.0</maxValue>
+    <iconID>0</iconID>
+    <port>2</port>
+  </item>
+  <item>
+    <id>5</id>
+  	<itemName>Landflowers</itemName>
+    <baseValue>6.0</baseValue>
+    <minValue>3.0</minValue>
+    <maxValue>12.0</maxValue>
+    <iconID>0</iconID>
+    <port>2</port>
+  </item>
+  <item>
+    <id>6</id>
+  	<itemName>FLOPs</itemName>
+    <baseValue>22.0</baseValue>
+    <minValue>20.0</minValue>
+    <maxValue>33.0</maxValue>
+    <iconID>0</iconID>
+    <port>2</port>
   </item>
 </InventoryItems>

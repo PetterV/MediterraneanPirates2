@@ -34,7 +34,7 @@ public class PortScreen : MonoBehaviour
 
     public void PopulateSellButtonList(PortInventory portInventory){
         sellButtons = new List<GameObject>();
-        foreach (ItemForSale item in portInventory.itemsForSale){
+        foreach (ItemForSale item in portInventory.itemsPurchasableHere){
             GameObject newButton = Instantiate(sellButtonsPrefab);
             newButton.transform.SetParent(sellButtonsPrefab.transform.parent);
             newButton.transform.localScale = sellButtonsPrefab.transform.localScale;
@@ -58,7 +58,7 @@ public class PortScreen : MonoBehaviour
 
     public void UpdateItemSaleView(){
         if (shipInventory.selectedSlot != null && shipInventory.selectedSlot.GetComponent<InventorySlot>().item != null){
-            ItemForSale itemForSale = currentPort.GetComponent<PortInventory>().itemsForPurchase.Find(x => x.item == shipInventory.selectedSlot.GetComponent<InventorySlot>().item);
+            ItemForSale itemForSale = currentPort.GetComponent<PortInventory>().itemsSellPricesHere.Find(x => x.item == shipInventory.selectedSlot.GetComponent<InventorySlot>().item);
 
             itemBeingSoldName.text = itemForSale.item.itemName;
             itemBeingSoldCost.text = itemForSale.price.ToString();
@@ -72,7 +72,7 @@ public class PortScreen : MonoBehaviour
     }
 
     public void PlayerSellItem(){
-        ItemForSale itemForSale = currentPort.GetComponent<PortInventory>().itemsForPurchase.Find(x => x.item == shipInventory.selectedSlot.GetComponent<InventorySlot>().item);
+        ItemForSale itemForSale = currentPort.GetComponent<PortInventory>().itemsSellPricesHere.Find(x => x.item == shipInventory.selectedSlot.GetComponent<InventorySlot>().item);
         if (itemForSale == null){
             Debug.LogError("ItemforSale not found!");
         }
