@@ -13,6 +13,7 @@ public class Port : MonoBehaviour
     public bool playerInPort;
     public bool showPortScreen;
     public PortInventory portInventory;
+    ShipInventory playerInventory;
     float portDelay = 0.3f;
     float timeRemaining;
 
@@ -21,6 +22,7 @@ public class Port : MonoBehaviour
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         portInventory = GetComponent<PortInventory>();
         portInventory.SetUpPortInventory();
+        playerInventory = GameObject.FindWithTag("Player").GetComponent<ShipInventory>();
         Debug.Log("Successfully set up " + portName);
     }
     
@@ -45,6 +47,7 @@ public class Port : MonoBehaviour
         portScreenScript.UpdatePortHeader(portName);
         portScreenScript.currentPort = this;
         portScreenScript.PopulateSellButtonList(portInventory);
+        portScreenScript.UpdateItemSaleView();
         portScreen.SetActive(true);
         gameController.EventPause();
     }

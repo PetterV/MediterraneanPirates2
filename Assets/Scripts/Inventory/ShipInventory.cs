@@ -10,6 +10,7 @@ public class ShipInventory : MonoBehaviour
     public int startingSlots = 10;
     int unlockedSlots;
     public bool shipInventoryOpen = false;
+    public PortScreen portScreen;
     public GameObject selectedSlot;
     public GameObject itemSlotParent;
     public GameObject itemSlotPrefab;
@@ -131,5 +132,8 @@ public class ShipInventory : MonoBehaviour
     public void SelectInventorySlot(GameObject slotObject){
         DeselectInventorySlot();
         selectedSlot = slotObject;
+        if (portScreen.gameObject.activeSelf){
+            portScreen.UpdateItemSaleView();
+        }
     }
 }

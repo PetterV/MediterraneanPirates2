@@ -29,6 +29,7 @@ public class PortInventory : MonoBehaviour
         }
 
         SetupItemsForSale();
+        SetUpPurchaseList();
     }
 
     void SetupItemsForSale(){

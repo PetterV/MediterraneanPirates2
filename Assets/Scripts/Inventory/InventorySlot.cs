@@ -27,6 +27,13 @@ public class InventorySlot : MonoBehaviour
         image.color = new Color(0,0,0,1);
     }
 
+    public void RemoveItem(){
+        item = null;
+        free = true;
+        image.sprite = null;
+        image.color = new Color(0,0,0,0);
+    }
+
     public void SelectThisSlot(){
         shipInventory.SelectInventorySlot(gameObject);
     }

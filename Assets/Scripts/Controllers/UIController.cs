@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
     public Image leftCannonCooldown;
     public CannonManager rightCannon;
     public Image rightCannonCooldown;
+    public PortScreen portScreen;
     void Awake()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("UIController");
@@ -29,6 +30,7 @@ public class UIController : MonoBehaviour
         sailSpeedDisplay = GameObject.Find("SailSpeedDisplay").GetComponent<TextMeshProUGUI>();
         ducatCount = GameObject.Find("DucatCounter").GetComponent<TextMeshProUGUI>();
         UpdateSailSpeedDisplay(0);
+        portScreen.SetupPortScreen();
     }
 
     public void UpdateSailSpeedDisplay(int value){

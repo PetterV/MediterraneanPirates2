@@ -11,10 +11,11 @@ public class PortScreen : MonoBehaviour
     PortInventory portInventory;
     public GameObject sellButtonsPrefab;
     public List<GameObject> sellButtons;
+    public GameObject playerSellButton;
     ShipInventory shipInventory;
     public TextMeshProUGUI itemBeingSoldName;
     public TextMeshProUGUI itemBeingSoldCost;
-    void Start(){
+    public void SetupPortScreen(){
         shipInventory = GameObject.FindWithTag("Player").GetComponent<ShipInventory>();
     }
     public void UpdatePortHeader(string name){
@@ -56,9 +57,28 @@ public class PortScreen : MonoBehaviour
     }
 
     public void UpdateItemSaleView(){
-        ItemForSale itemForSale = currentPort.GetComponent<PortInventory>().itemsForPurchase.Find(x => x.item == shipInventory.selectedSlot.GetComponent<InventorySlot>().item);
+        if (shipInventory.selectedSlot != null && shipInventory.selectedSlot.GetComponent<InventorySlot>().item != null){
+            ItemForSale itemForSale = currentPort.GetComponent<PortInventory>().itemsForPurchase.Find(x => x.item == shipInventory.selectedSlot.GetComponent<InventorySlot>().item);
 
-        itemBeingSoldName.text = itemForSale.item.itemName;
-        itemBeingSoldCost.text = itemForSale.price.ToString();
+            itemBeingSoldName.text = itemForSale.item.itemName;
+            itemBeingSoldCost.text = itemForSale.price.ToString();
+            playerSellButton.SetActive(true);
+        }
+        else {
+            itemBeingSoldName.text = "No item selected";
+            itemBeingSoldCost.text = "";
+            playerSellButton.SetActive(false);
+        }
+    }
+
+    public void PlayerSellItem(){
+        ItemForSale itemForSale = currentPort.GetComponent<PortInventory>().itemsForPurchase.Find(x => x.item == shipInventory.selectedSlot.GetComponent<InventorySlot>().item);
+        if (itemForSale == null){
+            Debug.LogError("ItemforSale not found!");
+        }
+        shipInventory.GainDucats((int)itemForSale.price);
+        shipInventory.selectedSlot.GetComponent<InventorySlot>().RemoveItem();
+
+        UpdateItemSaleView();
     }
 }
